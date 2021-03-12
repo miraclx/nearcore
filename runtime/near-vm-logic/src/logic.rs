@@ -4,6 +4,7 @@ use crate::gas_counter::GasCounter;
 use crate::types::{PromiseIndex, PromiseResult, ReceiptIndex, ReturnData};
 use crate::utils::split_method_names;
 use crate::ValuePtr;
+use blake2::crypto_mac::Mac;
 use byteorder::ByteOrder;
 use near_primitives_core::config::ExtCosts::*;
 use near_primitives_core::config::{ActionCosts, ExtCosts, VMConfig};
@@ -958,7 +959,7 @@ impl<'a> VMLogic<'a> {
     /// # Cost
     ///
     /// `base + write_register_base + write_register_byte * num_bytes + ripemd160_base + ripemd160_byte * num_bytes`
-    #[cfg(feature = "ripemd160")]
+    #[cfg(feature = "protocol_feature_ripemd160")]
     pub fn ripemd160(&mut self, value_len: u64, value_ptr: u64, register_id: u64) -> Result<()> {
         self.gas_counter.pay_base(ripemd160_base)?;
         let value = self.get_vec_from_memory_or_register(value_ptr, value_len)?;
@@ -980,7 +981,7 @@ impl<'a> VMLogic<'a> {
     /// # Cost
     ///
     /// `base + write_register_base + write_register_byte * num_bytes + blake2b_base + blake2b_byte * num_bytes`
-    #[cfg(feature = "blake2b")]
+    #[cfg(feature = "protocol_feature_blake2b")]
     pub fn blake2b(&mut self, value_len: u64, value_ptr: u64, register_id: u64) -> Result<()> {
         self.gas_counter.pay_base(blake2b_base)?;
         let value = self.get_vec_from_memory_or_register(value_ptr, value_len)?;
@@ -1006,7 +1007,7 @@ impl<'a> VMLogic<'a> {
     /// # Cost
     ///
     /// `base + write_register_base + write_register_byte * 20 + ecrecover_base`
-    #[cfg(feature = "ecrecover")]
+    #[cfg(feature = "protocol_feature_ecrecover")]
     pub fn ecrecover(
         &mut self,
         hash_ptr: u64,
