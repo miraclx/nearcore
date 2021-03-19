@@ -14,7 +14,7 @@ This crate implements the specification of the interface that Near blockchain ex
 
 [dependencies]
 base64 = "0.13"
-blake2 = { git = "https://github.com/near/near-blake2.git", version = "0.9.1", optional = true }
+blake2 = { git = "https://github.com/near/near-blake2.git", branch = "f-standard-out", version = "0.9.1", optional = true }
 borsh = "0.8.1"
 bs58 = "0.4"
 byteorder = "1.2"
@@ -42,10 +42,6 @@ protocol_feature_alt_bn128 = ["bn", "near-primitives-core/protocol_feature_alt_b
 wasmer0_default = []
 wasmtime_default = []
 wasmer1_default = []
-
-# cryptography extras
-blake2b = ["blake2"]
-ecrecover = ["libsecp256k1"]
 
 # Use this feature to enable counting of fees and costs applied.
 costs_counting = ["near-primitives-core/costs_counting"]
