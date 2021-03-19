@@ -41,7 +41,6 @@ protocol_feature_alt_bn128 = ["bn", "near-primitives-core/protocol_feature_alt_b
 
 wasmer0_default = []
 wasmtime_default = []
-crypto_extras = ["ripemd160", "blake2b", "ecrecover"]
 wasmer1_default = []
 
 # cryptography extras
