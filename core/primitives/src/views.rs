@@ -1018,7 +1018,7 @@ impl From<ExecutionOutcomeWithIdAndProof> for ExecutionOutcomeWithIdView {
     }
 }
 
-#[derive(BorshSerialize, BorshDeserialize, Serialize, Deserialize)]
+#[derive(BorshSerialize, BorshDeserialize, Serialize, Deserialize, Debug)]
 #[serde(untagged)]
 pub enum FinalExecutionOutcomeViewEnum {
     FinalExecutionOutcome(FinalExecutionOutcomeView),
@@ -1054,7 +1054,7 @@ impl fmt::Debug for FinalExecutionOutcomeView {
 
 /// Final execution outcome of the transaction and all of subsequent the receipts. Also includes
 /// the generated receipt.
-#[derive(BorshSerialize, BorshDeserialize, Serialize, Deserialize, PartialEq, Eq, Clone)]
+#[derive(BorshSerialize, BorshDeserialize, Serialize, Deserialize, PartialEq, Eq, Clone, Debug)]
 pub struct FinalExecutionOutcomeWithReceiptView {
     /// Final outcome view without receipts
     #[serde(flatten)]
