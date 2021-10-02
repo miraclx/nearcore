@@ -1,20 +1,20 @@
-#[cfg(feature = "ser_de")]
+#[cfg(feature = "serde")]
 use near_jsonrpc_primitives::errors::RpcError;
 use near_network::routing::{Edge, SimpleEdge};
 use near_primitives::network::PeerId;
-#[cfg(feature = "ser_de")]
-use serde::Deserialize;
-#[cfg(feature = "ser_de")]
+#[cfg(feature = "serde")]
+use serde_crate::Deserialize;
+#[cfg(feature = "serde")]
 use serde_json::Value;
 
-#[cfg_attr(feature = "ser_de", derive(Deserialize))]
+#[cfg_attr(feature = "serde", derive(Deserialize), serde(crate = "serde_crate"))]
 pub struct SetRoutingTableRequest {
     pub add_edges: Option<Vec<Edge>>,
     pub remove_edges: Option<Vec<SimpleEdge>>,
     pub prune_edges: Option<bool>,
 }
 
-#[cfg(feature = "ser_de")]
+#[cfg(feature = "serde")]
 impl SetRoutingTableRequest {
     pub fn parse(value: Option<Value>) -> Result<Self, RpcError> {
         if let Some(value) = value {
@@ -26,14 +26,14 @@ impl SetRoutingTableRequest {
     }
 }
 
-#[cfg_attr(feature = "ser_de", derive(Deserialize))]
+#[cfg_attr(feature = "serde", derive(Deserialize), serde(crate = "serde_crate"))]
 pub struct SetAdvOptionsRequest {
     pub disable_edge_signature_verification: Option<bool>,
     pub disable_edge_propagation: Option<bool>,
     pub disable_edge_pruning: Option<bool>,
 }
 
-#[cfg_attr(feature = "ser_de", derive(Deserialize))]
+#[cfg_attr(feature = "serde", derive(Deserialize), serde(crate = "serde_crate"))]
 pub struct StartRoutingTableSyncRequest {
     pub peer_id: PeerId,
 }

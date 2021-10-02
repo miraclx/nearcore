@@ -6,7 +6,7 @@ publish = false
 edition = "2018"
 
 [dependencies]
-serde = { version = "1", features = ["derive"], optional = true }
+serde_crate = { package = "serde", version = "1", features = ["derive"], optional = true }
 serde_json = { version = "1", optional = true }
 near-primitives = { path = "../../core/primitives" }
 
@@ -15,9 +15,9 @@ near-network = { path = "../network" }
 
 
 [features]
-ser_de = [
+serde = [
   "serde_json",
-  "serde",
+  "serde_crate",
   "near-jsonrpc-primitives",
   "near-network/adversarial"
 ]
